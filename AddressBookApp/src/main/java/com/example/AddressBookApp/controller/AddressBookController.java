@@ -2,8 +2,12 @@ package com.example.AddressBookApp.controller;
 
 import com.example.AddressBookApp.dto.AddressBookDTO;
 import com.example.AddressBookApp.model.AddressBookModel;
+import com.example.AddressBookApp.servicelayer.AddressBookServiceLayer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 
@@ -12,33 +16,23 @@ public class AddressBookController {
     public String hello(){
         return "hello";
     }
+    @Autowired
+    private AddressBookServiceLayer addressBookServiceLayer;
     @PostMapping("/add")
     public ResponseEntity<AddressBookDTO> add(@RequestBody AddressBookDTO addressBookDTO){
-        AddressBookModel addressBookModel=new AddressBookModel(addressBookDTO.getName(),addressBookDTO.getPhone(),addressBookDTO.getEmail());
-
-        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
-    }
+       return addressBookServiceLayer.add(addressBookDTO);}
     @PutMapping("/update/{id}")
-    public ResponseEntity<AddressBookDTO> update(@PathVariable Long id){
-        AddressBookModel addressBookModel=new AddressBookModel();
-
-        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
-    }
+    public ResponseEntity<AddressBookDTO> update(@PathVariable Long id,@RequestBody AddressBookDTO addressBookDTO){
+       return addressBookServiceLayer.update(id,addressBookDTO); }
     @GetMapping("/all")
-    public ResponseEntity<AddressBookDTO> all(){
-        AddressBookModel addressBookModel=new AddressBookModel();
+    public ResponseEntity<List<AddressBookDTO>> all(){
+        return addressBookServiceLayer.all();}
 
-        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
-    }
     @GetMapping("/check/{id}")
     public ResponseEntity<AddressBookDTO> check(@PathVariable Long id){
-        AddressBookModel addressBookModel=new AddressBookModel();
-
-        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
-    }
+      return addressBookServiceLayer.check(id); }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<AddressBookDTO> delete(@PathVariable Long id){
-        AddressBookModel addressBookModel=new AddressBookModel();
-        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
+      return addressBookServiceLayer.delete(id);
     }
 }
