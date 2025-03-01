@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 
@@ -25,14 +26,14 @@ public class AddressBookController {
     public ResponseEntity<AddressBookDTO> update(@PathVariable Long id,@RequestBody AddressBookDTO addressBookDTO){
        return addressBookServiceLayer.update(id,addressBookDTO); }
     @GetMapping("/all")
-    public ResponseEntity<List<AddressBookDTO>> all(){
+    public ResponseEntity<List<AddressBookModel>> all(){
         return addressBookServiceLayer.all();}
 
     @GetMapping("/check/{id}")
-    public ResponseEntity<AddressBookDTO> check(@PathVariable Long id){
+    public Optional<AddressBookModel> check(@PathVariable Long id){
       return addressBookServiceLayer.check(id); }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<AddressBookDTO> delete(@PathVariable Long id){
+    public ResponseEntity<String> delete(@PathVariable Long id){
       return addressBookServiceLayer.delete(id);
     }
 }

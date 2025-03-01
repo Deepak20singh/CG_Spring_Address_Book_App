@@ -21,6 +21,10 @@ public class AddressBookModel {
         this.email = email;
     }
 
+    public void setId(Long id) {
+        this.Id = id;
+    }
+
     public String getEmail() {
         return email;
     }
