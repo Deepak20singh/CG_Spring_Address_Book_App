@@ -1,5 +1,8 @@
 package com.example.AddressBookApp.controller;
 
+import com.example.AddressBookApp.dto.AddressBookDTO;
+import com.example.AddressBookApp.model.AddressBookModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,23 +13,32 @@ public class AddressBookController {
         return "hello";
     }
     @PostMapping("/add")
-    public String add(){
-        return "Added";
+    public ResponseEntity<AddressBookDTO> add(@RequestBody AddressBookDTO addressBookDTO){
+        AddressBookModel addressBookModel=new AddressBookModel(addressBookDTO.getName(),addressBookDTO.getPhone(),addressBookDTO.getEmail());
+
+        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
     }
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Long id){
-        return "Updated";
+    public ResponseEntity<AddressBookDTO> update(@PathVariable Long id){
+        AddressBookModel addressBookModel=new AddressBookModel();
+
+        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
     }
     @GetMapping("/all")
-    public String all(){
-        return "All data";
+    public ResponseEntity<AddressBookDTO> all(){
+        AddressBookModel addressBookModel=new AddressBookModel();
+
+        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
     }
     @GetMapping("/check/{id}")
-    public String check(@PathVariable Long id){
-        return "Element present";
+    public ResponseEntity<AddressBookDTO> check(@PathVariable Long id){
+        AddressBookModel addressBookModel=new AddressBookModel();
+
+        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
     }
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Long id){
-        return "Element deleted";
+    public ResponseEntity<AddressBookDTO> delete(@PathVariable Long id){
+        AddressBookModel addressBookModel=new AddressBookModel();
+        return ResponseEntity.ok(new AddressBookDTO(addressBookModel));
     }
 }
