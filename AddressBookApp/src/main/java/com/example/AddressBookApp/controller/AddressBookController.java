@@ -3,6 +3,7 @@ package com.example.AddressBookApp.controller;
 import com.example.AddressBookApp.dto.AddressBookDTO;
 import com.example.AddressBookApp.model.AddressBookModel;
 import com.example.AddressBookApp.servicelayer.AddressBookServiceLayer;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class AddressBookController {
     @Autowired
     private AddressBookServiceLayer addressBookServiceLayer;
     @PostMapping("/add")
-    public ResponseEntity<AddressBookDTO> add(@RequestBody AddressBookDTO addressBookDTO){
+    public ResponseEntity<AddressBookDTO> add(@Valid @RequestBody AddressBookDTO addressBookDTO){
        return addressBookServiceLayer.add(addressBookDTO);}
     @PutMapping("/update/{id}")
     public ResponseEntity<AddressBookDTO> update(@PathVariable Long id,@RequestBody AddressBookDTO addressBookDTO){
