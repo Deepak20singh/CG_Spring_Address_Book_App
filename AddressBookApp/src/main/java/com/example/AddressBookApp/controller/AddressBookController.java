@@ -13,20 +13,20 @@ public class AddressBookController {
     public String add(){
         return "Added";
     }
-    @PutMapping("/update")
-    public String update(){
+    @PutMapping("/update/{id}")
+    public String update(@PathVariable Long id){
         return "Updated";
     }
     @GetMapping("/all")
     public String all(){
         return "All data";
     }
-    @GetMapping("/check")
-    public String check(){
+    @GetMapping("/check/{id}")
+    public String check(@PathVariable Long id){
         return "Element present";
     }
-    @DeleteMapping("/delete")
-    public String delete(){
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
         return "Element deleted";
     }
 }
